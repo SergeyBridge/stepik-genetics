@@ -1,18 +1,18 @@
 FROM parseq/stepik-variant-calling-tools
 
 RUN apt-get clean | apt-get update
-RUN apt-get install -qy nano
+RUN apt-get install -qy snakemake
 
-ENV EDITOR nano
+ENV PIPELINE snakemake
 
-#VOLUME /home/stepik
+VOLUME /home/snakemake_dir
 ARG UID="1000"
 
 RUN useradd -ms /bin/bash $UID
 USER $UID
 
-WORKDIR /home/stepik
+WORKDIR /home/snakemake_dir
 
 
-CMD $EDITOR
-CMD ["nano", " " ]
+#CMD $EDITOR
+ENTRYPOINT $PIPELINE
